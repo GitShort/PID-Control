@@ -8,6 +8,7 @@ public class Movement : MonoBehaviour
 	public float targetAltitude = 0;
 	public PIDController altitudePID;
 	Rigidbody rb;
+	public float err;
 
 	void Start()
 	{
@@ -18,8 +19,11 @@ public class Movement : MonoBehaviour
 	{
 		float curAltitude = transform.position.y;
 
-		float err = targetAltitude - curAltitude; // Calculate error
-		float altitudeValue = Mathf.Clamp01(altitudePID.UpdatePIDValue(err, Time.deltaTime));
-		rb.AddTorque(new Vector3(0 , altitudeValue, 0));
+		err = targetAltitude - curAltitude; // Calculate error
+		//if (err > 0)
+		//{
+			float altitudeValue = altitudePID.UpdatePIDValue(err, Time.deltaTime);
+			gameObject.transform.position = new Vector3(0, altitudeValue, 0);
+		//}
 	}
 }
