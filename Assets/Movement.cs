@@ -23,7 +23,7 @@ public class Movement : MonoBehaviour
 		//if (err > 0)
 		//{
 		float altitudeValue = Mathf.Clamp(altitudePID.UpdatePIDValue(err, Time.deltaTime), 0f, 1f);
-		gameObject.transform.position = new Vector3(altitudeValue, 0, 0);
+		gameObject.transform.position = Vector3.Lerp(new Vector3(curAltitude, 0, 0), new Vector3(altitudeValue, 0, 0), .1f);
 		//}
 	}
 }
