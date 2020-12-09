@@ -17,13 +17,13 @@ public class Movement : MonoBehaviour
 
 	void Update()
 	{
-		float curAltitude = transform.position.y;
+		float curAltitude = transform.position.x;
 
 		err = targetAltitude - curAltitude; // Calculate error
 		//if (err > 0)
 		//{
-			float altitudeValue = altitudePID.UpdatePIDValue(err, Time.deltaTime);
-			gameObject.transform.position = new Vector3(0, altitudeValue, 0);
+		float altitudeValue = Mathf.Clamp(altitudePID.UpdatePIDValue(err, Time.deltaTime), 0f, 1f);
+		gameObject.transform.position = new Vector3(altitudeValue, 0, 0);
 		//}
 	}
 }
