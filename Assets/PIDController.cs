@@ -12,7 +12,6 @@ public class PIDController : MonoBehaviour
 	private float lastError;
 	private float integral;
 
-
 	/// 
 	/// Update our value, based on the given error, which was last updated
 	/// dt seconds ago.
@@ -22,12 +21,23 @@ public class PIDController : MonoBehaviour
 	/// Updated control value.
 	public float UpdatePIDValue(float error, float dt)
 	{
-		float derivative = (error - lastError) / dt; // Calculate derivative of the error
 		integral += error * dt; // Calculate integral of the error
+		float derivative = (error - lastError) / dt; // Calculate derivative of the error
 		lastError = error; // Update error
-
-		value = (Kp * error + Ki * integral + Kd * derivative); // Calculate control signal
+		value = Kp * error + Ki * integral + Kd * derivative; // Calculate control signal
 		return value;
+	}
+
+	public void LimitIntegral(float value)
+	{
+		if (integral >= value)
+		{
+			integral = value;
+		}
+		if (integral <= -value)
+		{
+			integral = -value;
+		}
 	}
 
 }

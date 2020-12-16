@@ -5,10 +5,15 @@ using UnityEngine;
 public class Movement : MonoBehaviour
 {
 	[Range(0.0f, 1f)]
-	public float targetAltitude = 0;
-	public PIDController altitudePID;
+	public float target = 0;
+	public PIDController PID;
 	Rigidbody rb;
 	public float err;
+	[SerializeField] float force = 2f;
+	[SerializeField] float integralLimit = 2f;
+	float horizontalSpeed = 0f;
+	float currentValue = 0;
+	float value = 0;
 
 	void Start()
 	{
@@ -17,13 +22,18 @@ public class Movement : MonoBehaviour
 
 	void Update()
 	{
-		float curAltitude = transform.position.x;
+		horizontalSpeed = rb.velocity.x;
+		currentValue = transform.position.x;
 
-		err = targetAltitude - curAltitude; // Calculate error
-		//if (err > 0)
-		//{
-		float altitudeValue = Mathf.Clamp(altitudePID.UpdatePIDValue(err, Time.deltaTime), 0f, 1f);
-		gameObject.transform.position = Vector3.Lerp(new Vector3(curAltitude, 0, 0), new Vector3(altitudeValue, 0, 0), .1f);
-		//}
+		err = target - currentValue; // Calculate error
+		value = PID.UpdatePIDValue(err, Time.deltaTime);
+
+		if (horizontalSpeed < -2f)
+		{
+			PID.LimitIntegral(0);
+		}
+		PID.LimitIntegral(integralLimit);
+		
+		rb.AddRelativeForce(Vector3.right * value * force);
 	}
 }
