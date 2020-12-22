@@ -14,10 +14,12 @@ public class Movement : MonoBehaviour
 	float horizontalSpeed = 0f;
 	float currentValue = 0;
 	float value = 0;
+	Frequancy frequancy;
 
 	void Start()
 	{
 		rb = GetComponent<Rigidbody>();
+		frequancy = GetComponent<Frequancy>();
 	}
 
 	void Update()
@@ -33,7 +35,9 @@ public class Movement : MonoBehaviour
 			PID.LimitIntegral(0);
 		}
 		PID.LimitIntegral(integralLimit);
-		
+
+		frequancy.FrequancyPitch(value);
+
 		rb.AddRelativeForce(Vector3.right * value * force);
 	}
 }
