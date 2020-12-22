@@ -15,9 +15,21 @@ public class Movement : MonoBehaviour
 	float currentValue = 0;
 	float value = 0;
 
+
+	[SerializeField] float lambdaMin = 0f;
+	[SerializeField] float lambdaMax = 1f;
+	[SerializeField] float forceMin = 0f;
+	[SerializeField] float forceMax = 1f;
+	[SerializeField] float scaleFactor = 1f;
+	float lambda = 0f;
+
+
+	MeshRenderer mat;
+
 	void Start()
 	{
 		rb = GetComponent<Rigidbody>();
+		mat = GetComponent<MeshRenderer>();
 	}
 
 	void Update()
@@ -28,12 +40,16 @@ public class Movement : MonoBehaviour
 		err = target - currentValue; // Calculate error
 		value = PID.UpdatePIDValue(err, Time.deltaTime);
 
-		if (horizontalSpeed < -2f)
+		if (horizontalSpeed > -3f)
 		{
 			PID.LimitIntegral(0);
 		}
 		PID.LimitIntegral(integralLimit);
-		
+
+		lambda = -2f * (scaleFactor * (value - forceMin) * (lambdaMax - lambdaMin)) / (forceMax - forceMin);
+		mat.material.color = Color.Lerp(Color.green, Color.red, lambda);
+
 		rb.AddRelativeForce(Vector3.right * value * force);
+
 	}
 }
