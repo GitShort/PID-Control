@@ -601,8 +601,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Kp: 1
-  Ki: 0
-  Kd: 0
+  Ki: 0.5
+  Kd: 0.7
   value: 0
 --- !u!82 &1028895931
 AudioSource:

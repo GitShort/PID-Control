@@ -14,7 +14,7 @@ public class Movement : MonoBehaviour
 	float horizontalSpeed = 0f;
 	float currentValue = 0;
 	float value = 0;
-	Frequancy frequancy;
+	Frequency frequency;
 
 
 	[SerializeField] float lambdaMin = 0f;
@@ -30,7 +30,7 @@ public class Movement : MonoBehaviour
 	void Start()
 	{
 		rb = GetComponent<Rigidbody>();
-		frequancy = GetComponent<Frequancy>();
+		frequency = GetComponent<Frequency>();
 		mat = GetComponent<MeshRenderer>();
 
 	}
@@ -43,14 +43,14 @@ public class Movement : MonoBehaviour
 		err = target - currentValue; // Calculate error
 		value = PID.UpdatePIDValue(err, Time.deltaTime);
 
-		if (horizontalSpeed > -3f)
+		if (horizontalSpeed > -2f)
 		{
 			PID.LimitIntegral(0);
 		}
 		PID.LimitIntegral(integralLimit);
 
-		frequancy.FrequancyPitch(value);
-		lambda = -2f * (scaleFactor * (value - forceMin) * (lambdaMax - lambdaMin)) / (forceMax - forceMin);
+		frequency.FrequancyPitch(value);
+		lambda = -1f * (scaleFactor * (value - forceMin) * (lambdaMax - lambdaMin)) / (forceMax - forceMin);
 		mat.material.color = Color.Lerp(Color.green, Color.red, lambda);
 
 		rb.AddRelativeForce(Vector3.right * value * force);

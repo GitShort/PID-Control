@@ -21,7 +21,7 @@ public class PIDController : MonoBehaviour
 	/// Updated control value.
 	public float UpdatePIDValue(float error, float dt)
 	{
-		integral += error * dt; // Calculate integral of the error
+		integral = error * dt; // Calculate integral of the error
 		float derivative = (error - lastError) / dt; // Calculate derivative of the error
 		lastError = error; // Update error
 		value = Kp * error + Ki * integral + Kd * derivative; // Calculate control signal

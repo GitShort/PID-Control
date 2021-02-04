@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 
-public class Frequancy : MonoBehaviour
+public class Frequency : MonoBehaviour
 {
 
     [SerializeField] float fMax = 0f;
