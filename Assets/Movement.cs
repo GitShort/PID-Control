@@ -51,7 +51,7 @@ public class Movement : MonoBehaviour
 
 		frequency.FrequancyPitch(value);
 		lambda = -1f * (scaleFactor * (value - forceMin) * (lambdaMax - lambdaMin)) / (forceMax - forceMin);
-		mat.material.color = Color.Lerp(Color.green, Color.red, lambda);
+		mat.material.color = Color.Lerp(Color.green, Color.red, Mathf.Abs(lambda));
 
 		rb.AddRelativeForce(Vector3.right * value * force);
 
