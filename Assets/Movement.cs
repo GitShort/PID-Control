@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Movement : MonoBehaviour
 {
@@ -26,9 +27,12 @@ public class Movement : MonoBehaviour
 
 
 	MeshRenderer mat;
+	[SerializeField]
+	TextMeshPro text;
 
 	void Start()
 	{
+		
 		rb = GetComponent<Rigidbody>();
 		frequency = GetComponent<Frequency>();
 		mat = GetComponent<MeshRenderer>();
@@ -42,7 +46,7 @@ public class Movement : MonoBehaviour
 
 		err = target - currentValue; // Calculate error
 		value = PID.UpdatePIDValue(err, Time.deltaTime);
-
+		text.text = "Distance " + (Mathf.Abs(err*1000)).ToString() + " mm";
 		if (horizontalSpeed > -2f)
 		{
 			PID.LimitIntegral(0);
