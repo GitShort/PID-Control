@@ -27,13 +27,13 @@ public class InteractionWithCube : MonoBehaviour
 	void Update()
 	{
 		RaycastHit hit;
-		//Vector3 fwd = this.gameObject.transform.TransformDirection(Vector3.right);
+		Vector3 fwd = this.gameObject.transform.TransformDirection(Vector3.right);
 		Vector3 vel = (transform.position - _previousPos) / Time.deltaTime;
 		_previousPos = transform.position;
 
 		vi = Mathf.Max(vel.x, vel.y, vel.z);
 		Vector3 direction = Cube.transform.position - this.gameObject.transform.position;
-		if (Physics.Raycast(transform.position, direction, out hit, rayCastDistance) && hit.collider.tag == "Cube")
+		if (Physics.Raycast(transform.position, fwd, out hit, rayCastDistance) && hit.collider.tag == "Cube")
 		{
 			spherePosition = hit.point;
 			Debug.DrawLine(transform.position, hit.point, Color.green);
@@ -49,7 +49,7 @@ public class InteractionWithCube : MonoBehaviour
 		else
 		{
 			drawSphere = false;
-			Debug.DrawRay(transform.position, direction, Color.red);
+			Debug.DrawRay(transform.position, fwd, Color.red);
 		}
 
 	}
