@@ -5,7 +5,7 @@ using UnityEngine;
 public class InteractionWithCube : MonoBehaviour
 {
 	float rayCastDistance = 1f;
-	bool drawSphere = false;
+	public bool drawSphere = false;
 	GameObject Cube;
 	public float Force;
 	float k = 1f;           //stiffness parameter
@@ -15,8 +15,9 @@ public class InteractionWithCube : MonoBehaviour
 	public float maximum = 1f;
 	public float minimum = 0f;
 	Vector3 _previousPos;
-	float Di;
+	public float Di;
 	Vector3 spherePosition;
+	public RaycastHit hit;
 	// Start is called before the first frame update
 	void Start()
 	{
@@ -26,7 +27,7 @@ public class InteractionWithCube : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		RaycastHit hit;
+		
 		Vector3 fwd = this.gameObject.transform.TransformDirection(Vector3.right);
 		Vector3 vel = (transform.position - _previousPos) / Time.deltaTime;
 		_previousPos = transform.position;

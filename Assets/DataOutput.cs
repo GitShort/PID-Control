@@ -9,14 +9,13 @@ public class DataOutput : MonoBehaviour
 	private bool IsOpen = false;
 	private string FileName;
 	private StreamWriter sr;
-	public Movement dataScript;
-	private bool Moved = false;
+	public InteractionWithCube FingerCheck;
 
 	// Start is called before the first frame update
 	void Start()
 
     {
-
+		FingerCheck = this.gameObject.GetComponent<InteractionWithCube>();
 	}
 
     // Update is called once per frame
@@ -24,7 +23,7 @@ public class DataOutput : MonoBehaviour
     {
 		
 
-		if (Moved)
+		if (FingerCheck.drawSphere)
 		{
 			if (!IsOpen)
 			{
@@ -45,19 +44,21 @@ public class DataOutput : MonoBehaviour
 				sr = File.CreateText(FileName);
 				IsOpen = true;
 			}
-			string data = this.gameObject.transform.position.x.ToString() + "," + (Math.Abs(dataScript.errx * 1000)).ToString() + ","
-				+ this.gameObject.transform.position.y.ToString() + "," + (Math.Abs(dataScript.erry * 1000)).ToString()
-				+ "," + this.gameObject.transform.position.z.ToString() + "," + (Math.Abs(dataScript.errz * 1000)).ToString() + "," 
-				+ ((dataScript.valuex*dataScript.force+dataScript.valuey*dataScript.force+dataScript.valuez*dataScript.force)/3).ToString() + ","
-				+ (1000*Mathf.Sqrt(Mathf.Pow(transform.position.x-dataScript.targetx, 2) + Mathf.Pow(transform.position.y - dataScript.targety, 2) + Mathf.Pow(transform.position.z - dataScript.targetz, 2))).ToString()
-				+ "," + dataScript.lambdaavg.ToString();
+			float xPosition = this.gameObject.transform.position.x;
+			float yPosition = this.gameObject.transform.position.y;
+			float zPosition = this.gameObject.transform.position.z;
+			float Distance = FingerCheck.hit.distance;
+			float Force = FingerCheck.Force;
+			float Vibration = FingerCheck.Di;
+			string data = xPosition.ToString() + "," 
+				+ yPosition.ToString() + ","
+				+ zPosition.ToString() + "," 
+				+ Distance.ToString() + ","
+				+ Force.ToString() + ","
+				+ Vibration.ToString();
 
-			Debug.Log(FileName);
+			//Debug.Log(FileName);
 			sr.WriteLine(data);
-		}
-		if(dataScript.errx != 0 || dataScript.erry != 0 || dataScript.errz != 0)
-		{
-			Moved = true;
 		}
 	}
 }
