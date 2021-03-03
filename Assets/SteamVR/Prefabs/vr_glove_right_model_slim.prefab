@@ -783,9 +783,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d79820bd67c6f274096bd6ad75a95363, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  drawSphere: 0
   Force: 0
   maximum: 1
   minimum: 0
+  Di: 0
+  handType: 2
+  hapticAction:
+    actionPath: /actions/default/out/Haptic
+    needsReinit: 0
 --- !u!114 &154130554081689316
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -798,7 +804,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31ba611dbc528bb409534251e413ee41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dataScript: {fileID: 0}
+  FingerCheck: {fileID: 0}
 --- !u!1 &1000012305119260
 GameObject:
   m_ObjectHideFlags: 0
@@ -843,9 +849,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d79820bd67c6f274096bd6ad75a95363, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  drawSphere: 0
   Force: 0
   maximum: 1
   minimum: 0
+  Di: 0
+  handType: 2
+  hapticAction:
+    actionPath: /actions/default/out/Haptic
+    needsReinit: 0
 --- !u!114 &161287631142445964
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -858,7 +870,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31ba611dbc528bb409534251e413ee41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dataScript: {fileID: 0}
+  FingerCheck: {fileID: 0}
 --- !u!1 &1000012305400488
 GameObject:
   m_ObjectHideFlags: 0
@@ -999,9 +1011,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d79820bd67c6f274096bd6ad75a95363, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  drawSphere: 0
   Force: 0
   maximum: 1
   minimum: 0
+  Di: 0
+  handType: 2
+  hapticAction:
+    actionPath: /actions/default/out/Haptic
+    needsReinit: 0
 --- !u!114 &5142339918938029011
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1014,7 +1032,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31ba611dbc528bb409534251e413ee41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dataScript: {fileID: 0}
+  FingerCheck: {fileID: 0}
 --- !u!1 &1000012527515208
 GameObject:
   m_ObjectHideFlags: 0
@@ -1259,9 +1277,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d79820bd67c6f274096bd6ad75a95363, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  drawSphere: 0
   Force: 0
   maximum: 1
   minimum: 0
+  Di: 0
+  handType: 2
+  hapticAction:
+    actionPath: /actions/default/out/Haptic
+    needsReinit: 0
 --- !u!114 &8363230375576112370
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1274,7 +1298,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31ba611dbc528bb409534251e413ee41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dataScript: {fileID: 0}
+  FingerCheck: {fileID: 0}
 --- !u!1 &1000013232349450
 GameObject:
   m_ObjectHideFlags: 0
@@ -1381,9 +1405,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d79820bd67c6f274096bd6ad75a95363, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  drawSphere: 0
   Force: 0
   maximum: 1
   minimum: 0
+  Di: 0
+  handType: 2
+  hapticAction:
+    actionPath: /actions/default/out/Haptic
+    needsReinit: 0
 --- !u!114 &5658785469268266477
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1396,7 +1426,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31ba611dbc528bb409534251e413ee41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dataScript: {fileID: 0}
+  FingerCheck: {fileID: 0}
 --- !u!1 &1000014073017736
 GameObject:
   m_ObjectHideFlags: 0

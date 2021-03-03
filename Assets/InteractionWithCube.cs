@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Valve.VR;
 
 public class InteractionWithCube : MonoBehaviour
 {
@@ -18,13 +19,15 @@ public class InteractionWithCube : MonoBehaviour
 	public float Di;
 	Vector3 spherePosition;
 	public RaycastHit hit;
-	// Start is called before the first frame update
+
+	public SteamVR_Input_Sources handType;
+	public SteamVR_Action_Vibration hapticAction = SteamVR_Input.GetAction<SteamVR_Action_Vibration>("Haptic");
+
 	void Start()
 	{
 		Cube = GameObject.Find("Cube");
 	}
 
-	// Update is called once per frame
 	void Update()
 	{
 		
@@ -45,7 +48,7 @@ public class InteractionWithCube : MonoBehaviour
 			//Debug.Log("Force: " + Force.ToString());
 			Di = (lambda * Mathf.Abs(Force) - minimum) / (maximum - minimum);
 			//Debug.Log("Di: " + Di.ToString());
-
+			TriggerHapticPulse(Time.deltaTime, 0, Di);
 		}
 		else
 		{
@@ -62,6 +65,10 @@ public class InteractionWithCube : MonoBehaviour
 			Gizmos.color = Color.Lerp(Color.green, Color.red, Mathf.Abs(Di));
 			Gizmos.DrawSphere(spherePosition, 0.03f);
 		}
+	}
+	public void TriggerHapticPulse(float duration, float frequency, float amplitude)
+	{
+		hapticAction.Execute(0, duration, frequency, amplitude, handType);
 	}
 
 }
