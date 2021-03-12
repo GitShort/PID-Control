@@ -44,21 +44,24 @@ public class DataOutput : MonoBehaviour
 				sr = File.CreateText(FileName);
 				IsOpen = true;
 			}
-			float xPosition = this.gameObject.transform.position.x;
-			float yPosition = this.gameObject.transform.position.y;
-			float zPosition = this.gameObject.transform.position.z;
-			float Distance = FingerCheck.hit.distance;
-			float Force = FingerCheck.Force;
-			float Vibration = FingerCheck.Di;
-			string data = xPosition.ToString() + "," 
-				+ yPosition.ToString() + ","
-				+ zPosition.ToString() + "," 
-				+ Distance.ToString() + ","
-				+ Force.ToString() + ","
-				+ Vibration.ToString();
+			if (FingerCheck.RecordData)
+			{
+				float xPosition = this.gameObject.transform.position.x;
+				float yPosition = this.gameObject.transform.position.y;
+				float zPosition = this.gameObject.transform.position.z;
+				float Distance = FingerCheck.hit.distance;
+				float Force = FingerCheck.Force;
+				float Vibration = FingerCheck.Di;
+				string data = xPosition.ToString() + ","
+					+ yPosition.ToString() + ","
+					+ zPosition.ToString() + ","
+					+ Distance.ToString() + ","
+					+ Force.ToString() + ","
+					+ Vibration.ToString();
 
-			//Debug.Log(FileName);
-			sr.WriteLine(data);
+				//Debug.Log(FileName);
+				sr.WriteLine(data);
+			}
 		}
 	}
 }

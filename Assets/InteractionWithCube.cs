@@ -19,6 +19,8 @@ public class InteractionWithCube : MonoBehaviour
 	public float Di;
 	Vector3 spherePosition;
 	public RaycastHit hit;
+	public float _previousDistance;
+	public bool RecordData;
 
 	public SteamVR_Input_Sources handType;
 	public SteamVR_Action_Vibration hapticAction = SteamVR_Input.GetAction<SteamVR_Action_Vibration>("Haptic");
@@ -26,6 +28,7 @@ public class InteractionWithCube : MonoBehaviour
 	void Start()
 	{
 		Cube = GameObject.Find("Cube");
+		RecordData = false;
 	}
 
 	void Update()
@@ -34,17 +37,25 @@ public class InteractionWithCube : MonoBehaviour
 		Vector3 fwd = this.gameObject.transform.TransformDirection(Vector3.right);
 		Vector3 vel = (transform.position - _previousPos) / Time.deltaTime;
 		_previousPos = transform.position;
-
 		vi = Mathf.Max(vel.x, vel.y, vel.z);
 		Vector3 direction = Cube.transform.position - this.gameObject.transform.position;
 		if (Physics.Raycast(transform.position, fwd, out hit, rayCastDistance) && hit.collider.tag == "Cube")
 		{
+			if(hit.distance < _previousDistance)
+			{
+				RecordData = true;
+			}
+			else
+			{
+				RecordData = false;
+			}
+			_previousDistance = hit.distance;
 			spherePosition = hit.point;
 			Debug.DrawLine(transform.position, hit.point, Color.green);
 			//Debug.Log(vi.ToString());
 			drawSphere = true;
 			Force = k * (rayCastDistance - hit.distance) - ki * Mathf.Abs(vi);
-			Debug.Log((rayCastDistance - hit.distance).ToString());
+			//Debug.Log((rayCastDistance - hit.distance).ToString());
 			//Debug.Log("Force: " + Force.ToString());
 			Di = (lambda * Mathf.Abs(Force) - minimum) / (maximum - minimum);
 			//Debug.Log("Di: " + Di.ToString());
