@@ -25,6 +25,8 @@ public class InteractionWithCube : MonoBehaviour
 	public SteamVR_Input_Sources handType;
 	public SteamVR_Action_Vibration hapticAction = SteamVR_Input.GetAction<SteamVR_Action_Vibration>("Haptic");
 
+	public SerialConnection.Fingers finger;
+
 	void Start()
 	{
 		Cube = GameObject.Find("Cube");
@@ -41,7 +43,7 @@ public class InteractionWithCube : MonoBehaviour
 		Vector3 direction = Cube.transform.position - this.gameObject.transform.position;
 		if (Physics.Raycast(transform.position, fwd, out hit, rayCastDistance) && hit.collider.tag == "Cube")
 		{
-			if(hit.distance < _previousDistance)
+			if (hit.distance < _previousDistance)
 			{
 				RecordData = true;
 			}
@@ -59,13 +61,17 @@ public class InteractionWithCube : MonoBehaviour
 			//Debug.Log("Force: " + Force.ToString());
 			Di = (lambda * Mathf.Abs(Force) - minimum) / (maximum - minimum);
 			//Debug.Log("Di: " + Di.ToString());
-			TriggerHapticPulse(Time.deltaTime, 0, Di);
+			//TriggerHapticPulse(Time.deltaTime, 0, Di);
+			int result = PrepareValue(Di, 0, 255);
+			SerialConnection.AddFingerForce(result, finger);
 		}
 		else
 		{
 			drawSphere = false;
 			Debug.DrawRay(transform.position, fwd, Color.red);
+			SerialConnection.AddFingerForce(0, finger);
 		}
+		SerialConnection.Ready(finger);
 
 	}
 
@@ -80,6 +86,14 @@ public class InteractionWithCube : MonoBehaviour
 	public void TriggerHapticPulse(float duration, float frequency, float amplitude)
 	{
 		hapticAction.Execute(0, duration, frequency, amplitude, handType);
+	}
+
+	public int PrepareValue(float value, int min, int max)
+	{
+		float procentage = (value / maximum) * 100;
+		float returnValue = (max/100)*procentage;
+		//Debug.Log(returnValue);
+		return (int)returnValue;
 	}
 
 }

@@ -8,7 +8,7 @@ using System.Text;
 
 public class SerialConnection : MonoBehaviour
 {
-    enum Fingers
+    public enum Fingers
     { 
         LeftThumb,
         LeftIndex,
@@ -23,13 +23,15 @@ public class SerialConnection : MonoBehaviour
     }
 
 
-    static float[] hand = new float[10];
-    static bool[] ready = new bool[10];
+    static int[] hand = new int[10];
+    static int ready = 0;
     static int currentIndex = 0;
     SerialPort port;
     Thread workThread;
     bool work = false;
     StringBuilder sb = new StringBuilder();
+    public bool arduinoReady = true;
+    object lockObject = new object();
     // Start is called before the first frame update
     void Start()
     {
@@ -40,6 +42,8 @@ public class SerialConnection : MonoBehaviour
         {
             work = true;
             workThread.Start();
+            Thread receiveThread = new Thread(() => serialPort1_DataReceived());
+            receiveThread.Start();
         }
     }
 
@@ -66,7 +70,7 @@ public class SerialConnection : MonoBehaviour
             return;
         }
 
-        name = "COM3";
+        name = "/dev/tty.usbmodem1433201";
         Debug.Log("Baud rate:");
         baud = GetBaudRate();
         Debug.Log("Beging Serial...");
@@ -74,13 +78,13 @@ public class SerialConnection : MonoBehaviour
         port.Open();
         Debug.Log("Serial Started.");
         Debug.Log("Ctrl+C to exit program");
-        Debug.Log("Send:");
-        port.WriteLine("okay");
-        port.WriteLine("okay");
-        port.WriteLine("okay");
-        port.WriteLine("okay");
-        port.WriteLine("okay");
-        port.Close();
+        //Debug.Log("Send:");
+        //port.WriteLine("okay");
+        //port.WriteLine("okay");
+        //port.WriteLine("okay");
+        //port.WriteLine("okay");
+        //port.WriteLine("okay");
+        //port.Close();
     }
 
 
@@ -103,27 +107,61 @@ public class SerialConnection : MonoBehaviour
         }
     }
 
+    private void serialPort1_DataReceived()
+    {
+        while (work)
+        {
+            char tempChar = ' ';
+            string temp = "";
+            while (tempChar != ';')
+            {
+                tempChar = (char)port.ReadByte();
+                if (tempChar == ';')
+                {
+                    break;
+                }
+                else
+                {
+                    temp = temp + tempChar;
+                }
+            }
+            
+            if (temp == "Received")
+            {
+                SetArduinoState(true);
+            }
+            Debug.Log(temp);
+        }
+    }
+
+    void SetArduinoState(bool value)
+    {
+        lock (lockObject)
+        {
+            arduinoReady = value;
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
         
     }
 
-    static void AddFingerForce(float force, Fingers enumerator)
+    public static void AddFingerForce(int force, Fingers enumerator)
     {
         int index = (int)enumerator;
         hand[index] = force;
     }
 
-    static void Ready(Fingers enumerator)
+    public static void Ready(Fingers enumerator)
     {
-        int index = (int)enumerator;
-        ready[index] = true;
+        ready++;
     }
 
     public void clearAfterSend()
     {
-        Array.Clear(ready, 0, 10);
+        ready = 0;
         Array.Clear(hand, 0, 10);
     }
 
@@ -132,42 +170,54 @@ public class SerialConnection : MonoBehaviour
         
         while (work)
         {
-            if (Allready())
+            if (Allready() && port.IsOpen && arduinoReady)
             {
+                sb.Clear();
                 string messaga = CreateMessage(ref sb);
-                port.WriteLine(messaga);
+                port.Write(messaga);
+                clearAfterSend();
+                SetArduinoState(false);
             }
+            
         }
     }
+
+
+
 
     public string CreateMessage(ref StringBuilder sb)
     {
         for (int i = 0; i < hand.Length; i++)
         {
             sb.Append(hand[i].ToString() + ";");
+            
         }
+        sb.Append('\n');
         return sb.ToString();
     }
 
     public bool Allready()
     {
-        bool check = true;
-        for (int i = 0; i < ready.Length; i++)
+        if (ready < 10)
         {
-            if (!ready[i])
-            {
-                check = false;
-                break;
-            }
+            return false;
         }
-        return check;
+        else
+        {
+            return true;
+        }
+
     }
+
 
     private void OnApplicationQuit()
     {
-        
+
         work = false;
         workThread.Abort();
+        port.Close();
+
     }
+
 
 }

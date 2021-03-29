@@ -12297,6 +12297,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c9b06518ba7c9b478bf4922eac24952, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  arduinoReady: 1
 --- !u!4 &897445787
 Transform:
   m_ObjectHideFlags: 0
@@ -26900,6 +26901,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 107946, guid: dc06161b6d97feb419f45f03b62e14b9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 447954, guid: dc06161b6d97feb419f45f03b62e14b9, type: 3}
       propertyPath: m_RootOrder
       value: 0

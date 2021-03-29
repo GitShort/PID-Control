@@ -788,10 +788,13 @@ MonoBehaviour:
   maximum: 1
   minimum: 0
   Di: 0
+  _previousDistance: 0
+  RecordData: 0
   handType: 2
   hapticAction:
     actionPath: /actions/default/out/Haptic
     needsReinit: 0
+  finger: 7
 --- !u!114 &154130554081689316
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -854,10 +857,13 @@ MonoBehaviour:
   maximum: 1
   minimum: 0
   Di: 0
+  _previousDistance: 0
+  RecordData: 0
   handType: 2
   hapticAction:
     actionPath: /actions/default/out/Haptic
     needsReinit: 0
+  finger: 9
 --- !u!114 &161287631142445964
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1016,10 +1022,13 @@ MonoBehaviour:
   maximum: 1
   minimum: 0
   Di: 0
+  _previousDistance: 0
+  RecordData: 0
   handType: 2
   hapticAction:
     actionPath: /actions/default/out/Haptic
     needsReinit: 0
+  finger: 8
 --- !u!114 &5142339918938029011
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1282,10 +1291,13 @@ MonoBehaviour:
   maximum: 1
   minimum: 0
   Di: 0
+  _previousDistance: 0
+  RecordData: 0
   handType: 2
   hapticAction:
     actionPath: /actions/default/out/Haptic
     needsReinit: 0
+  finger: 6
 --- !u!114 &8363230375576112370
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1410,10 +1422,13 @@ MonoBehaviour:
   maximum: 1
   minimum: 0
   Di: 0
+  _previousDistance: 0
+  RecordData: 0
   handType: 2
   hapticAction:
     actionPath: /actions/default/out/Haptic
     needsReinit: 0
+  finger: 5
 --- !u!114 &5658785469268266477
 MonoBehaviour:
   m_ObjectHideFlags: 0
