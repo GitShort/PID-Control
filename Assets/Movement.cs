@@ -74,7 +74,7 @@ public class Movement : MonoBehaviour
 		}
 		PID.LimitIntegral(integralLimit);
 
-		frequency.FrequancyPitch(valuex);
+
 		lambdax = -1f * (scaleFactor * (valuex - forceMin) * (lambdaMax - lambdaMin)) / (forceMax - forceMin);
 		lambday = -1f * (scaleFactor * (valuey - forceMin) * (lambdaMax - lambdaMin)) / (forceMax - forceMin);
 		lambdaz = -1f * (scaleFactor * (valuez - forceMin) * (lambdaMax - lambdaMin)) / (forceMax - forceMin);

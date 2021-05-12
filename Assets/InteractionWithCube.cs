@@ -29,6 +29,8 @@ public class InteractionWithCube : MonoBehaviour
 	public SteamVR_Input_Sources handType;
 	public SteamVR_Action_Vibration hapticAction = SteamVR_Input.GetAction<SteamVR_Action_Vibration>("Haptic");
 
+	public Frequency frequency;
+
 	public SerialConnection.Fingers finger;
 
 	void Start()
@@ -62,6 +64,7 @@ public class InteractionWithCube : MonoBehaviour
 			drawSphere = true;
 			Force = k * (rayCastDistance - hit.distance) - ki * Mathf.Abs(vi);
 			lambda = (gama * (Mathf.Abs(Force) - minimum) * (lambdaMax - lambdaMin)) / (maximum - minimum);
+			frequency.FrequancyPitch(Force, minimum, maximum);
 			//Debug.Log((rayCastDistance - hit.distance).ToString());
 			//Debug.Log("Force: " + Force.ToString());
 			Di = (lambda * Mathf.Abs(Force) - minimum) / (maximum - minimum);

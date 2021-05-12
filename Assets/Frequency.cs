@@ -8,8 +8,6 @@ public class Frequency : MonoBehaviour
 
     [SerializeField] float fMax = 0f;
     [SerializeField] float fMin = 0f;
-    [SerializeField] float forceMin = 0f;
-    [SerializeField] float forceMax = 0f;
     [SerializeField] float scaleFactor = 1f;
     AudioSource source;
     // Start is called before the first frame update
@@ -24,9 +22,9 @@ public class Frequency : MonoBehaviour
         
     }
 
-    public void FrequancyPitch(float force)
+    public void FrequancyPitch(float force, float forceMin, float forceMax)
     {
-        float result = fMin*((scaleFactor * (force - forceMin) *(fMax - fMin))/(forceMax - forceMin));
+        float result = fMin*((scaleFactor * (force - forceMin) * (fMax - fMin))/(forceMax - forceMin));
         source.pitch = result;
     }
 }

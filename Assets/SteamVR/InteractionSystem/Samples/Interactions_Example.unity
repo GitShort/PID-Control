@@ -19940,6 +19940,10 @@ PrefabInstance:
       propertyPath: scaleFactor
       value: 0.05
       objectReference: {fileID: 0}
+    - target: {fileID: 4071713259360695321, guid: b4ba41f4e3d068440a4d33cf02dabedc, type: 3}
+      propertyPath: m_Pitch
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4071713259360695323, guid: b4ba41f4e3d068440a4d33cf02dabedc, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -19983,6 +19987,10 @@ PrefabInstance:
     - target: {fileID: 4071713259360695323, guid: b4ba41f4e3d068440a4d33cf02dabedc, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4071713259360695326, guid: b4ba41f4e3d068440a4d33cf02dabedc, type: 3}
+      propertyPath: fMin
+      value: -3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b4ba41f4e3d068440a4d33cf02dabedc, type: 3}
