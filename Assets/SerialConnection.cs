@@ -173,8 +173,8 @@ public class SerialConnection : MonoBehaviour
             if (Allready() && port.IsOpen && arduinoReady)
             {
                 sb.Clear();
-                string messaga = CreateMessage(ref sb);
-                port.Write(messaga);
+                string message = CreateMessage(ref sb);
+                port.Write(message);
                 clearAfterSend();
                 SetArduinoState(false);
             }

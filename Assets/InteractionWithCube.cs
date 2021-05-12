@@ -13,8 +13,12 @@ public class InteractionWithCube : MonoBehaviour
 	float ki = 1f;          //dampining parameter
 	float vi;               //velocity of approach
 	float lambda = 1f;
+	float gama = 1f;
 	public float maximum = 1f;
 	public float minimum = 0f;
+	public float lambdaMax = 1f;
+	public float lambdaMin = 0.01f;
+
 	Vector3 _previousPos;
 	public float Di;
 	Vector3 spherePosition;
@@ -37,9 +41,9 @@ public class InteractionWithCube : MonoBehaviour
 	{
 		
 		Vector3 fwd = this.gameObject.transform.TransformDirection(Vector3.right);
-		Vector3 vel = (transform.position - _previousPos) / Time.deltaTime;
+		Vector3 velocity = (transform.position - _previousPos) / Time.deltaTime; 
 		_previousPos = transform.position;
-		vi = Mathf.Max(vel.x, vel.y, vel.z);
+		vi = Mathf.Max(velocity.x, velocity.y, velocity.z);
 		Vector3 direction = Cube.transform.position - this.gameObject.transform.position;
 		if (Physics.Raycast(transform.position, fwd, out hit, rayCastDistance) && hit.collider.tag == "Cube")
 		{
@@ -57,11 +61,12 @@ public class InteractionWithCube : MonoBehaviour
 			//Debug.Log(vi.ToString());
 			drawSphere = true;
 			Force = k * (rayCastDistance - hit.distance) - ki * Mathf.Abs(vi);
+			lambda = (gama * (Mathf.Abs(Force) - minimum) * (lambdaMax - lambdaMin)) / (maximum - minimum);
 			//Debug.Log((rayCastDistance - hit.distance).ToString());
 			//Debug.Log("Force: " + Force.ToString());
 			Di = (lambda * Mathf.Abs(Force) - minimum) / (maximum - minimum);
 			//Debug.Log("Di: " + Di.ToString());
-			//TriggerHapticPulse(Time.deltaTime, 0, Di);
+			TriggerHapticPulse(Time.deltaTime, 0, Di);
 			int result = PrepareValue(Di, 0, 255);
 			SerialConnection.AddFingerForce(result, finger);
 		}
@@ -75,14 +80,17 @@ public class InteractionWithCube : MonoBehaviour
 
 	}
 
+	// visual feedback
 	void OnDrawGizmosSelected()
 	{
 		if (drawSphere)
 		{
-			Gizmos.color = Color.Lerp(Color.green, Color.red, Mathf.Abs(Di));
+			Gizmos.color = Color.Lerp(Color.green, Color.red, Mathf.Abs(lambda));
 			Gizmos.DrawSphere(spherePosition, 0.03f);
 		}
 	}
+
+	// Tactile feedback
 	public void TriggerHapticPulse(float duration, float frequency, float amplitude)
 	{
 		hapticAction.Execute(0, duration, frequency, amplitude, handType);
