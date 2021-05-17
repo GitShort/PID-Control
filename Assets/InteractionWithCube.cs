@@ -20,7 +20,7 @@ public class InteractionWithCube : MonoBehaviour
 	public float lambdaMin = 0.01f;
 
 	Vector3 _previousPos;
-	public float Di;
+	public float Di;		// 
 	Vector3 spherePosition;
 	public RaycastHit hit;
 	public float _previousDistance;
@@ -35,7 +35,7 @@ public class InteractionWithCube : MonoBehaviour
 
 	void Start()
 	{
-		Cube = GameObject.Find("Cube");
+		//Cube = GameObject.Find("Cube");
 		RecordData = false;
 	}
 
@@ -46,8 +46,8 @@ public class InteractionWithCube : MonoBehaviour
 		Vector3 velocity = (transform.position - _previousPos) / Time.deltaTime; 
 		_previousPos = transform.position;
 		vi = Mathf.Max(velocity.x, velocity.y, velocity.z);
-		Vector3 direction = Cube.transform.position - this.gameObject.transform.position;
-		if (Physics.Raycast(transform.position, fwd, out hit, rayCastDistance) && hit.collider.tag == "Cube")
+		//Vector3 direction = Cube.transform.position - this.gameObject.transform.position;
+		if (Physics.Raycast(transform.position, fwd, out hit, rayCastDistance) && (hit.collider.tag == "Cube" || hit.collider.tag == "Cylinder" || hit.collider.tag == "Cone"))
 		{
 			if (hit.distance < _previousDistance)
 			{
