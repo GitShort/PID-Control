@@ -7,7 +7,7 @@ public class InteractionWithCube : MonoBehaviour
 {
 	float rayCastDistance = 1f;
 	public bool drawSphere = false;
-	GameObject Cube;
+	//GameObject Cube;
 	public float Force;
 	float k = 1f;           //stiffness parameter
 	float ki = 1f;          //dampining parameter
@@ -31,7 +31,7 @@ public class InteractionWithCube : MonoBehaviour
 
 	public Frequency frequency;
 
-	public SerialConnection.Fingers finger;
+	//public SerialConnection.Fingers finger;
 
 	void Start()
 	{
@@ -64,7 +64,7 @@ public class InteractionWithCube : MonoBehaviour
 			drawSphere = true;
 			Force = k * (rayCastDistance - hit.distance) - ki * Mathf.Abs(vi);
 			lambda = (gama * (Mathf.Abs(Force) - minimum) * (lambdaMax - lambdaMin)) / (maximum - minimum);
-			//frequency.FrequancyPitch(Force, minimum, maximum);
+			frequency.FrequancyPitch(Force, minimum, maximum);
 			//Debug.Log((rayCastDistance - hit.distance).ToString());
 			//Debug.Log("Force: " + Force.ToString());
 			Di = (lambda * Mathf.Abs(Force) - minimum) / (maximum - minimum);
@@ -77,9 +77,9 @@ public class InteractionWithCube : MonoBehaviour
 		{
 			drawSphere = false;
 			Debug.DrawRay(transform.position, fwd, Color.red);
-			SerialConnection.AddFingerForce(0, finger);
+			//SerialConnection.AddFingerForce(0, finger);
 		}
-		SerialConnection.Ready(finger);
+		//SerialConnection.Ready(finger);
 
 	}
 
@@ -106,5 +106,4 @@ public class InteractionWithCube : MonoBehaviour
 		//Debug.Log(returnValue);
 		return (int)returnValue;
 	}
-
 }
