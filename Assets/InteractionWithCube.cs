@@ -64,14 +64,14 @@ public class InteractionWithCube : MonoBehaviour
 			drawSphere = true;
 			Force = k * (rayCastDistance - hit.distance) - ki * Mathf.Abs(vi);
 			lambda = (gama * (Mathf.Abs(Force) - minimum) * (lambdaMax - lambdaMin)) / (maximum - minimum);
-			frequency.FrequancyPitch(Force, minimum, maximum);
+			//frequency.FrequancyPitch(Force, minimum, maximum);
 			//Debug.Log((rayCastDistance - hit.distance).ToString());
 			//Debug.Log("Force: " + Force.ToString());
 			Di = (lambda * Mathf.Abs(Force) - minimum) / (maximum - minimum);
 			//Debug.Log("Di: " + Di.ToString());
 			TriggerHapticPulse(Time.deltaTime, 0, Di);
-			int result = PrepareValue(Di, 0, 255);
-			SerialConnection.AddFingerForce(result, finger);
+			//int result = PrepareValue(Di, 0, 255);
+			//SerialConnection.AddFingerForce(result, finger);
 		}
 		else
 		{
