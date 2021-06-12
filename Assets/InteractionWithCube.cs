@@ -25,16 +25,20 @@ public class InteractionWithCube : MonoBehaviour
 	public RaycastHit hit;
 	public float _previousDistance;
 	public bool RecordData;
+	public GameObject Sphere;
+	public LineRenderer line;
 
 	public SteamVR_Input_Sources handType;
 	public SteamVR_Action_Vibration hapticAction = SteamVR_Input.GetAction<SteamVR_Action_Vibration>("Haptic");
 
 	public Frequency frequency;
 
+
 	//public SerialConnection.Fingers finger;
 
 	void Start()
 	{
+		line = this.GetComponent<LineRenderer>();
 		//Cube = GameObject.Find("Cube");
 		RecordData = false;
 	}
@@ -58,13 +62,17 @@ public class InteractionWithCube : MonoBehaviour
 				RecordData = false;
 			}
 			_previousDistance = hit.distance;
-			spherePosition = hit.point;
+			//spherePosition = hit.point;
 			Debug.DrawLine(transform.position, hit.point, Color.green);
+			line.SetPosition(1, new Vector3(hit.distance, 0, 0));
 			//Debug.Log(vi.ToString());
 			drawSphere = true;
 			Force = k * (rayCastDistance - hit.distance) - ki * Mathf.Abs(vi);
 			lambda = (gama * (Mathf.Abs(Force) - minimum) * (lambdaMax - lambdaMin)) / (maximum - minimum);
 			frequency.FrequancyPitch(Force, minimum, maximum);
+			Sphere.SetActive(true);
+			Sphere.transform.position = hit.point;
+			Sphere.GetComponent<MeshRenderer>().material.color = Color.Lerp(Color.green, Color.red, Mathf.Abs(lambda));
 			//Debug.Log((rayCastDistance - hit.distance).ToString());
 			//Debug.Log("Force: " + Force.ToString());
 			Di = (lambda * Mathf.Abs(Force) - minimum) / (maximum - minimum);
@@ -75,8 +83,10 @@ public class InteractionWithCube : MonoBehaviour
 		}
 		else
 		{
+			Sphere.SetActive(false);
 			drawSphere = false;
 			Debug.DrawRay(transform.position, fwd, Color.red);
+			line.SetPosition(1, new Vector3(0, 0, 0));
 			//SerialConnection.AddFingerForce(0, finger);
 		}
 		//SerialConnection.Ready(finger);
@@ -84,14 +94,14 @@ public class InteractionWithCube : MonoBehaviour
 	}
 
 	// visual feedback
-	void OnDrawGizmosSelected()
-	{
-		if (drawSphere)
-		{
-			Gizmos.color = Color.Lerp(Color.green, Color.red, Mathf.Abs(lambda));
-			Gizmos.DrawSphere(spherePosition, 0.03f);
-		}
-	}
+	//void OnDrawGizmosSelected()
+	//{
+	//	if (drawSphere)
+	//	{
+	//		Gizmos.color = Color.Lerp(Color.green, Color.red, Mathf.Abs(lambda));
+	//		Gizmos.DrawSphere(spherePosition, 0.03f);
+	//	}
+	//}
 
 	// Tactile feedback
 	public void TriggerHapticPulse(float duration, float frequency, float amplitude)
