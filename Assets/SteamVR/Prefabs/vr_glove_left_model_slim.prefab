@@ -88,6 +88,7 @@ MonoBehaviour:
   _previousDistance: 0
   RecordData: 0
   Sphere: {fileID: 6579394199603377164}
+  line: {fileID: 0}
   handType: 1
   hapticAction:
     actionPath: /actions/default/out/Haptic
@@ -434,6 +435,7 @@ MonoBehaviour:
   _previousDistance: 0
   RecordData: 0
   Sphere: {fileID: 2082640469769489087}
+  line: {fileID: 0}
   handType: 1
   hapticAction:
     actionPath: /actions/default/out/Haptic
@@ -718,6 +720,7 @@ MonoBehaviour:
   _previousDistance: 0
   RecordData: 0
   Sphere: {fileID: 324979220750648777}
+  line: {fileID: 0}
   handType: 1
   hapticAction:
     actionPath: /actions/default/out/Haptic
@@ -1038,6 +1041,7 @@ MonoBehaviour:
   _previousDistance: 0
   RecordData: 0
   Sphere: {fileID: 4424362962736699594}
+  line: {fileID: 0}
   handType: 1
   hapticAction:
     actionPath: /actions/default/out/Haptic
@@ -2357,6 +2361,7 @@ MonoBehaviour:
   _previousDistance: 0
   RecordData: 0
   Sphere: {fileID: 5302226338205778015}
+  line: {fileID: 0}
   handType: 1
   hapticAction:
     actionPath: /actions/default/out/Haptic
@@ -2601,7 +2606,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6093916402582266779
 Transform:
   m_ObjectHideFlags: 0
@@ -2682,7 +2687,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &9146861988105018591
 Transform:
   m_ObjectHideFlags: 0
@@ -2763,7 +2768,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6213455573871998796
 Transform:
   m_ObjectHideFlags: 0
@@ -2844,7 +2849,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2088979095674283264
 Transform:
   m_ObjectHideFlags: 0
@@ -2925,7 +2930,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8456038775891355226
 Transform:
   m_ObjectHideFlags: 0
