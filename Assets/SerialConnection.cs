@@ -215,8 +215,8 @@ public class SerialConnection : MonoBehaviour
 
     public bool Allready()
     {
-		Debug.Log(ready);
-		if (ready > 0)
+
+		if (ready < 10 && realReady == 0)
         {
             return false;
         }

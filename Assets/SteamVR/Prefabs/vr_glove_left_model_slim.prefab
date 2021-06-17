@@ -97,6 +97,11 @@ MonoBehaviour:
   minNormalizeValue: 0
   maxNormalizeValue: 70
   finger: 0
+  index: 0
+  visual: 0
+  audioFeedback: 0
+  tactileFeedback: 0
+  oneTime: 0
 --- !u!114 &5219544994791469172
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -110,6 +115,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FingerCheck: {fileID: 0}
+  Manager: {fileID: 0}
 --- !u!114 &4744599618733910093
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -136,7 +142,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 563ada1a33bfeef43871969556f08484, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 0
   Loop: 1
@@ -447,6 +453,11 @@ MonoBehaviour:
   minNormalizeValue: 0
   maxNormalizeValue: 70
   finger: 2
+  index: 0
+  visual: 0
+  audioFeedback: 0
+  tactileFeedback: 0
+  oneTime: 0
 --- !u!114 &8831643626380800529
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -460,6 +471,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FingerCheck: {fileID: 0}
+  Manager: {fileID: 0}
 --- !u!114 &2247352505942999356
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -486,7 +498,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 563ada1a33bfeef43871969556f08484, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 0
   Loop: 1
@@ -735,6 +747,11 @@ MonoBehaviour:
   minNormalizeValue: 0
   maxNormalizeValue: 70
   finger: 4
+  index: 0
+  visual: 0
+  audioFeedback: 0
+  tactileFeedback: 0
+  oneTime: 0
 --- !u!114 &2934721237909001998
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -748,6 +765,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FingerCheck: {fileID: 0}
+  Manager: {fileID: 0}
 --- !u!114 &7637471577777619252
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -774,7 +792,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 563ada1a33bfeef43871969556f08484, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 0
   Loop: 1
@@ -1059,6 +1077,11 @@ MonoBehaviour:
   minNormalizeValue: 0
   maxNormalizeValue: 70
   finger: 3
+  index: 0
+  visual: 0
+  audioFeedback: 0
+  tactileFeedback: 0
+  oneTime: 0
 --- !u!114 &4414961760190588754
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1072,6 +1095,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FingerCheck: {fileID: 0}
+  Manager: {fileID: 0}
 --- !u!114 &4586694043136564167
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1098,7 +1122,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 563ada1a33bfeef43871969556f08484, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 0
   Loop: 1
@@ -2382,6 +2406,11 @@ MonoBehaviour:
   minNormalizeValue: 0
   maxNormalizeValue: 70
   finger: 1
+  index: 0
+  visual: 0
+  audioFeedback: 0
+  tactileFeedback: 0
+  oneTime: 0
 --- !u!114 &546193234411190922
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2395,6 +2424,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FingerCheck: {fileID: 0}
+  Manager: {fileID: 0}
 --- !u!114 &4993606787227801294
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2421,7 +2451,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 563ada1a33bfeef43871969556f08484, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 0
   Loop: 1

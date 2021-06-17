@@ -24,6 +24,10 @@ public class Frequency : MonoBehaviour
 
     public void FrequancyPitch(float force, float forceMin, float forceMax)
     {
+        if (!source.isPlaying)
+        {
+            source.Play();
+        }
         float result = fMin*((scaleFactor * (force - forceMin) * (fMax - fMin))/(forceMax - forceMin));
         source.pitch = result;
     }

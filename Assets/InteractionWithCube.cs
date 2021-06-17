@@ -36,22 +36,42 @@ public class InteractionWithCube : MonoBehaviour
 	public float minNormalizeValue = 0;
 	public float maxNormalizeValue = 100;
 	public SerialConnection.Fingers finger;
-	public index = 0;
+	public int index = 0;
 	public bool visual;
-	public bool audioVisual;
-	public bool tactileAudioVisual;
+	public bool audioFeedback;
+	public bool tactileFeedback;
+
+	public bool oneTime = false;
 
 	void Start()
 	{
-		index = Random.Range(0, 2)
+
+		index = Random.Range(0, 2);
 		line = this.GetComponent<LineRenderer>();
+		visual = false;
+		audioFeedback = false;
+		tactileFeedback = false;
 		//Cube = GameObject.Find("Cube");
 		RecordData = false;
 	}
 
 	void Update()
 	{
-		
+		if (Input.GetKeyDown(KeyCode.Alpha1))
+		{
+			visual = true;
+		}
+
+		if (Input.GetKeyDown(KeyCode.Alpha2))
+		{
+			audioFeedback = false;
+		}
+
+		if (Input.GetKeyDown(KeyCode.Alpha3))
+		{
+			tactileFeedback = true;
+		}
+
 		Vector3 fwd = this.gameObject.transform.TransformDirection(Vector3.right);
 		Vector3 velocity = (transform.position - _previousPos) / Time.deltaTime; 
 		_previousPos = transform.position;
@@ -72,22 +92,26 @@ public class InteractionWithCube : MonoBehaviour
 
 			Debug.DrawLine(transform.position, hit.point, Color.green);
 
-			line.SetPosition(1, new Vector3(hit.distance, 0, 0));
-			
 			//Debug.Log(vi.ToString());
 			drawSphere = true;
 			Force = k * (rayCastDistance - hit.distance) - ki * Mathf.Abs(vi);
 			lambda = (gama * (Mathf.Abs(Force) - minimum) * (lambdaMax - lambdaMin)) / (maximum - minimum);
-			if(index > 0)
+			if(audioFeedback)
 			{
-				
 				frequency.FrequancyPitch(Force, minimum, maximum);
 			}
-			if(index == 0)
+
+			if (visual)
 			{
+				line.SetPosition(1, new Vector3(hit.distance, 0, 0));
 				Sphere.SetActive(true);
 				Sphere.transform.position = hit.point;
 				Sphere.GetComponent<MeshRenderer>().material.color = Color.Lerp(Color.green, Color.red, Mathf.Abs(lambda));
+			}
+			else 
+			{
+				Sphere.SetActive(false);
+				line.SetPosition(1, new Vector3(0, 0, 0));
 			}
 			//Debug.Log((rayCastDistance - hit.distance).ToString());
 			//Debug.Log("Force: " + Force.ToString());
@@ -96,7 +120,7 @@ public class InteractionWithCube : MonoBehaviour
 			//TriggerHapticPulse(Time.deltaTime, 0, Di);
 			int result = PrepareValue(Di, minNormalizeValue, maxNormalizeValue);
 			//Debug.Log("Normalized: " + result);
-			if(index > 1)
+			if(tactileFeedback)
 			{
 				SerialConnection.AddFingerForce(result, finger);
 				SerialConnection.Ready(finger);
@@ -107,13 +131,11 @@ public class InteractionWithCube : MonoBehaviour
 			Sphere.SetActive(false);
 			drawSphere = false;
 			Debug.DrawRay(transform.position, fwd, Color.red);
-			if(index == 0)
-			{
-				line.SetPosition(1, new Vector3(0, 0, 0));
-			}
+			line.SetPosition(1, new Vector3(0, 0, 0));
+			
 			//SerialConnection.AddFingerForce(0, finger);
 		}
-		if(index > 1)
+		if(tactileFeedback)
 		{
 			SerialConnection.LoopReady(finger);
 		}
