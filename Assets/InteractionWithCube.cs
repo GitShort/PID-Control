@@ -33,9 +33,9 @@ public class InteractionWithCube : MonoBehaviour
 
 	public Frequency frequency;
 
-	public int minNormalizeValue = 0;
-	public int maxNormalizeValue = 100;
-	//public SerialConnection.Fingers finger;
+	public float minNormalizeValue = 0;
+	public float maxNormalizeValue = 100;
+	public SerialConnection.Fingers finger;
 
 	void Start()
 	{
@@ -79,8 +79,9 @@ public class InteractionWithCube : MonoBehaviour
 			Di = (lambda * Mathf.Abs(Force) - minimum) / (maximum - minimum);
 			//Debug.Log("Di: " + Di.ToString());
 			TriggerHapticPulse(Time.deltaTime, 0, Di);
-			//int result = PrepareValue(Di, minNormalizeValue, maxNormalizeValue);
-			//SerialConnection.AddFingerForce(result, finger);
+			int result = PrepareValue(Di, minNormalizeValue, maxNormalizeValue);
+			//Debug.Log("Normalized: " + result);
+			SerialConnection.AddFingerForce(result, finger);
 		}
 		else
 		{
@@ -90,7 +91,7 @@ public class InteractionWithCube : MonoBehaviour
 			line.SetPosition(1, new Vector3(0, 0, 0));
 			//SerialConnection.AddFingerForce(0, finger);
 		}
-		//SerialConnection.Ready(finger);
+		SerialConnection.Ready(finger);
 
 	}
 
@@ -110,11 +111,11 @@ public class InteractionWithCube : MonoBehaviour
 		hapticAction.Execute(0, duration, frequency, amplitude, handType);
 	}
 
-	public int PrepareValue(float value, int min, int max)
+	public int PrepareValue(float value, float min, float max)
 	{
 		float procentage = (value / maximum) * 100;
 		float returnValue = (max/100)*procentage;
-		//Debug.Log(returnValue);
-		return (int)returnValue;
+		int res = (int)returnValue;
+		return (int)res;
 	}
 }

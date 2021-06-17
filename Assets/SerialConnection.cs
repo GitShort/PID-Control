@@ -70,7 +70,7 @@ public class SerialConnection : MonoBehaviour
             return;
         }
 
-        name = "/dev/tty.usbmodem1433201";
+        name = "COM4";
         Debug.Log("Baud rate:");
         baud = GetBaudRate();
         Debug.Log("Beging Serial...");
@@ -142,7 +142,7 @@ public class SerialConnection : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
+    // Update is called once per frame kek ceburek xddddddddddddddddddddd 
     void Update()
     {
         
@@ -152,6 +152,7 @@ public class SerialConnection : MonoBehaviour
     {
         int index = (int)enumerator;
         hand[index] = force;
+		//Debug.Log(index);
     }
 
     public static void Ready(Fingers enumerator)
@@ -198,7 +199,8 @@ public class SerialConnection : MonoBehaviour
 
     public bool Allready()
     {
-        if (ready < 10)
+		Debug.Log(ready);
+		if (ready < 10)
         {
             return false;
         }
@@ -206,7 +208,7 @@ public class SerialConnection : MonoBehaviour
         {
             return true;
         }
-
+		
     }
 
 

@@ -807,6 +807,9 @@ MonoBehaviour:
     actionPath: /actions/default/out/Haptic
     needsReinit: 0
   frequency: {fileID: 1827242764334759374}
+  minNormalizeValue: 0
+  maxNormalizeValue: 70
+  finger: 7
 --- !u!114 &154130554081689316
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1092,6 +1095,9 @@ MonoBehaviour:
     actionPath: /actions/default/out/Haptic
     needsReinit: 0
   frequency: {fileID: 7895697661235632498}
+  minNormalizeValue: 0
+  maxNormalizeValue: 70
+  finger: 9
 --- !u!114 &161287631142445964
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1473,6 +1479,9 @@ MonoBehaviour:
     actionPath: /actions/default/out/Haptic
     needsReinit: 0
   frequency: {fileID: 5391888950046212087}
+  minNormalizeValue: 0
+  maxNormalizeValue: 70
+  finger: 8
 --- !u!114 &5142339918938029011
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1958,6 +1967,9 @@ MonoBehaviour:
     actionPath: /actions/default/out/Haptic
     needsReinit: 0
   frequency: {fileID: 7688403897172320771}
+  minNormalizeValue: 0
+  maxNormalizeValue: 70
+  finger: 6
 --- !u!114 &8363230375576112370
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2305,6 +2317,9 @@ MonoBehaviour:
     actionPath: /actions/default/out/Haptic
     needsReinit: 0
   frequency: {fileID: 878740052925537903}
+  minNormalizeValue: 0
+  maxNormalizeValue: 70
+  finger: 5
 --- !u!114 &5658785469268266477
 MonoBehaviour:
   m_ObjectHideFlags: 0
