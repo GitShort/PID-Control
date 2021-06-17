@@ -36,9 +36,14 @@ public class InteractionWithCube : MonoBehaviour
 	public float minNormalizeValue = 0;
 	public float maxNormalizeValue = 100;
 	public SerialConnection.Fingers finger;
+	public index = 0;
+	public bool visual;
+	public bool audioVisual;
+	public bool tactileAudioVisual;
 
 	void Start()
 	{
+		index = Random.Range(0, 2)
 		line = this.GetComponent<LineRenderer>();
 		//Cube = GameObject.Find("Cube");
 		RecordData = false;
@@ -64,34 +69,54 @@ public class InteractionWithCube : MonoBehaviour
 			}
 			_previousDistance = hit.distance;
 			//spherePosition = hit.point;
+
 			Debug.DrawLine(transform.position, hit.point, Color.green);
+
 			line.SetPosition(1, new Vector3(hit.distance, 0, 0));
+			
 			//Debug.Log(vi.ToString());
 			drawSphere = true;
 			Force = k * (rayCastDistance - hit.distance) - ki * Mathf.Abs(vi);
 			lambda = (gama * (Mathf.Abs(Force) - minimum) * (lambdaMax - lambdaMin)) / (maximum - minimum);
-			frequency.FrequancyPitch(Force, minimum, maximum);
-			Sphere.SetActive(true);
-			Sphere.transform.position = hit.point;
-			Sphere.GetComponent<MeshRenderer>().material.color = Color.Lerp(Color.green, Color.red, Mathf.Abs(lambda));
+			if(index > 0)
+			{
+				
+				frequency.FrequancyPitch(Force, minimum, maximum);
+			}
+			if(index == 0)
+			{
+				Sphere.SetActive(true);
+				Sphere.transform.position = hit.point;
+				Sphere.GetComponent<MeshRenderer>().material.color = Color.Lerp(Color.green, Color.red, Mathf.Abs(lambda));
+			}
 			//Debug.Log((rayCastDistance - hit.distance).ToString());
 			//Debug.Log("Force: " + Force.ToString());
 			Di = (lambda * Mathf.Abs(Force) - minimum) / (maximum - minimum);
 			//Debug.Log("Di: " + Di.ToString());
-			TriggerHapticPulse(Time.deltaTime, 0, Di);
+			//TriggerHapticPulse(Time.deltaTime, 0, Di);
 			int result = PrepareValue(Di, minNormalizeValue, maxNormalizeValue);
 			//Debug.Log("Normalized: " + result);
-			SerialConnection.AddFingerForce(result, finger);
+			if(index > 1)
+			{
+				SerialConnection.AddFingerForce(result, finger);
+				SerialConnection.Ready(finger);
+			}
 		}
 		else
 		{
 			Sphere.SetActive(false);
 			drawSphere = false;
 			Debug.DrawRay(transform.position, fwd, Color.red);
-			line.SetPosition(1, new Vector3(0, 0, 0));
+			if(index == 0)
+			{
+				line.SetPosition(1, new Vector3(0, 0, 0));
+			}
 			//SerialConnection.AddFingerForce(0, finger);
 		}
-		SerialConnection.Ready(finger);
+		if(index > 1)
+		{
+			SerialConnection.LoopReady(finger);
+		}
 
 	}
 

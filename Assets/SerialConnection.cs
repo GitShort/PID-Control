@@ -25,6 +25,7 @@ public class SerialConnection : MonoBehaviour
 
     static int[] hand = new int[10];
     static int ready = 0;
+    static int realReady = 0;
     static int currentIndex = 0;
     SerialPort port;
     Thread workThread;
@@ -33,8 +34,17 @@ public class SerialConnection : MonoBehaviour
     public bool arduinoReady = true;
     object lockObject = new object();
     // Start is called before the first frame update
+    public void ResetStatic()
+    {
+        int[] hand = new int[10];
+        ready = 0;
+        realReady = 0;
+        currentIndex = 0;
+    }
+
     void Start()
     {
+        ResetStatic();
         workThread = new Thread(() => SendMessage());
         workThread.Name = "SendMessageToSerialPort";
         SetupConnection();
@@ -155,14 +165,20 @@ public class SerialConnection : MonoBehaviour
 		//Debug.Log(index);
     }
 
-    public static void Ready(Fingers enumerator)
+    public static void LoopReady(Fingers enumerator)
     {
         ready++;
+    }
+
+    public static void Ready(Fingers enumerator)
+    {
+        realReady++;
     }
 
     public void clearAfterSend()
     {
         ready = 0;
+        realReady = 0;
         Array.Clear(hand, 0, 10);
     }
 
@@ -200,7 +216,7 @@ public class SerialConnection : MonoBehaviour
     public bool Allready()
     {
 		Debug.Log(ready);
-		if (ready < 10)
+		if (ready > 0)
         {
             return false;
         }
