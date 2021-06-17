@@ -10,12 +10,14 @@ public class DataOutput : MonoBehaviour
 	private string FileName;
 	private StreamWriter sr;
 	public InteractionWithCube FingerCheck;
+	public GameManager Manager;
 
 	// Start is called before the first frame update
 	void Start()
 
     {
 		FingerCheck = this.gameObject.GetComponent<InteractionWithCube>();
+		Manager = FindObjectOfType<GameManager>();
 	}
 
     // Update is called once per frame
@@ -52,15 +54,28 @@ public class DataOutput : MonoBehaviour
 				float Distance = FingerCheck.hit.distance;
 				float Force = FingerCheck.Force;
 				float Vibration = FingerCheck.Di;
-				string data = xPosition.ToString() + ","
-					+ yPosition.ToString() + ","
-					+ zPosition.ToString() + ","
-					+ Distance.ToString() + ","
-					+ Force.ToString() + ","
-					+ Vibration.ToString();
-
+				if (!Manager.CheckIfDone())
+				{
+					string data = xPosition.ToString() + ","
+						+ yPosition.ToString() + ","
+						+ zPosition.ToString() + ","
+						+ Distance.ToString() + ","
+						+ Force.ToString() + ","
+						+ Vibration.ToString();
+						sr.WriteLine(data);
+				}
+				else
+				{
+					string data = xPosition.ToString() + ","
+						+ yPosition.ToString() + ","
+						+ zPosition.ToString() + ","
+						+ Distance.ToString() + ","
+						+ Force.ToString() + ","
+						+ Vibration.ToString() + ","
+						+ Manager.getClock().ToString();
+						sr.WriteLine(data);
+				}
 				//Debug.Log(FileName);
-				sr.WriteLine(data);
 			}
 		}
 	}
