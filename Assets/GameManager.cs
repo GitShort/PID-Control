@@ -32,7 +32,8 @@ public class GameManager : MonoBehaviour
     {
         CheckIfRun = false;
         Done = false;
-    }
+		ResetClock();
+	}
 
     // Update is called once per frame
     void Update()
@@ -68,4 +69,19 @@ public class GameManager : MonoBehaviour
             CheckIfRun = true;
         }
     }
+
+	public float getClock()
+	{
+		return Clock;
+	}
+
+	public void ResetClock()
+	{
+		Clock = 0f;
+	}
+
+	public bool CheckIfDone()
+	{
+		return Done;
+	}
 }
