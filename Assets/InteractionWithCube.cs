@@ -33,7 +33,8 @@ public class InteractionWithCube : MonoBehaviour
 
 	public Frequency frequency;
 
-
+	public int minNormalizeValue = 0;
+	public int maxNormalizeValue = 100;
 	//public SerialConnection.Fingers finger;
 
 	void Start()
@@ -78,7 +79,7 @@ public class InteractionWithCube : MonoBehaviour
 			Di = (lambda * Mathf.Abs(Force) - minimum) / (maximum - minimum);
 			//Debug.Log("Di: " + Di.ToString());
 			TriggerHapticPulse(Time.deltaTime, 0, Di);
-			//int result = PrepareValue(Di, 0, 255);
+			//int result = PrepareValue(Di, minNormalizeValue, maxNormalizeValue);
 			//SerialConnection.AddFingerForce(result, finger);
 		}
 		else
