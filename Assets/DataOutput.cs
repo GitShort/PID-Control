@@ -8,19 +8,47 @@ public class DataOutput : MonoBehaviour
 {
 	private bool IsOpen = false;
 	private string FileName;
+	private static string directoryName;
+	private static bool directoryCreated = false;
 	private StreamWriter sr;
+	
 	public InteractionWithCube FingerCheck;
 	public GameManager Manager;
 	public bool audioCheck = false;
 	public bool hapticCheck = false;
 	public bool VisualCheck = false;
 
+
 	// Start is called before the first frame update
 	void Start()
-
     {
 		FingerCheck = this.gameObject.GetComponent<InteractionWithCube>();
 		Manager = FindObjectOfType<GameManager>();
+		
+		if(!directoryCreated)
+		{
+			
+			if(!PlayerPrefs.HasKey("folderName"))
+			{
+				PlayerPrefs.SetInt("folderName", 0);
+			}
+			else
+			{
+				PlayerPrefs.SetInt("folderName", PlayerPrefs.GetInt("folderName") + 1);
+			}
+
+			directoryName = PlayerPrefs.GetInt("folderName").ToString();
+
+			if(Directory.Exists(directoryName))
+			{
+				Debug.Log(directoryName + " already exists");
+				return;
+			}
+
+			Directory.CreateDirectory(directoryName);
+			directoryCreated = true;
+		}
+
 	}
 
     // Update is called once per frame
@@ -40,29 +68,35 @@ public class DataOutput : MonoBehaviour
 				{
 					PlayerPrefs.SetInt("fileName", PlayerPrefs.GetInt("fileName") + 1);
 				}
+
 				FileName = PlayerPrefs.GetInt("fileName").ToString() + ".csv";
 				if (File.Exists(FileName))
 				{
 					Debug.Log(FileName + " already exists");
 					return;
 				}
-				sr = File.CreateText(FileName);
+
+				sr = File.CreateText(directoryName + "/" + FileName);
+				
 				IsOpen = true;
 			}
 			if (FingerCheck.RecordData)
 			{
 				if (FingerCheck.audioFeedback && !VisualCheck)
 				{
+					Directory.Move(directoryName, (directoryName + " Visual Feedback"));
 					VisualCheck = true;
 					sr.WriteLine("Visual Feedback");
 				}
 				if (FingerCheck.audioFeedback && !audioCheck)
 				{
+					Directory.Move(directoryName, (directoryName + " Audio Feedback"));
 					audioCheck = true;
 					sr.WriteLine("Audio Feedback");
 				}
 				if(FingerCheck.tactileFeedback && !hapticCheck)
 				{
+					Directory.Move(directoryName, (directoryName + " Haptic Feedback"));
 					hapticCheck = true;
 					sr.WriteLine("Haptic Feedback");
 				}
