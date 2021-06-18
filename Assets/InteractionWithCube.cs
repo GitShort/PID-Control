@@ -64,7 +64,7 @@ public class InteractionWithCube : MonoBehaviour
 
 		if (Input.GetKeyDown(KeyCode.Alpha2))
 		{
-			audioFeedback = false;
+			audioFeedback = true;
 		}
 
 		if (Input.GetKeyDown(KeyCode.Alpha3))
