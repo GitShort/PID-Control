@@ -123,11 +123,16 @@ public class DataOutput : MonoBehaviour
 						+ zPosition.ToString() + ","
 						+ Distance.ToString() + ","
 						+ Force.ToString() + ","
-						+ Vibration.ToString() + ","
-						+ Manager.getClock().ToString();
+						+ Vibration.ToString() + ",";
 						sr.WriteLine(data);
 				}
+				
 				//Debug.Log(FileName);
+			}
+			if (Manager.CheckIfDone())
+			{
+				string data = Manager.getClock().ToString();
+				sr.WriteLine(data);
 			}
 		}
 	}
