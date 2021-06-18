@@ -10,6 +10,9 @@ public class DataOutput : MonoBehaviour
 	private string FileName;
 	private static string directoryName;
 	private static bool directoryCreated = false;
+	private static bool audioStatic;
+	private static bool visualStatic;
+	private static bool hapticStatic;
 	private StreamWriter sr;
 	
 	public InteractionWithCube FingerCheck;
@@ -84,19 +87,31 @@ public class DataOutput : MonoBehaviour
 			{
 				if (FingerCheck.audioFeedback && !VisualCheck)
 				{
-					Directory.Move(directoryName, (directoryName + " Visual Feedback"));
+					if(!visualStatic)
+					{
+						Directory.Move(directoryName, (directoryName + " Visual Feedback"));
+						audioStatic = true;
+					}
 					VisualCheck = true;
 					sr.WriteLine("Visual Feedback");
 				}
 				if (FingerCheck.audioFeedback && !audioCheck)
 				{
-					Directory.Move(directoryName, (directoryName + " Audio Feedback"));
+					if(!audioStatic)
+					{
+						Directory.Move(directoryName, (directoryName + " Audio Feedback"));
+						audioStatic = true;
+					}
 					audioCheck = true;
 					sr.WriteLine("Audio Feedback");
 				}
 				if(FingerCheck.tactileFeedback && !hapticCheck)
 				{
-					Directory.Move(directoryName, (directoryName + " Haptic Feedback"));
+					if(!hapticStatic)
+					{
+						Directory.Move(directoryName, (directoryName + " Haptic Feedback"));
+						hapticStatic = true;
+					}
 					hapticCheck = true;
 					sr.WriteLine("Haptic Feedback");
 				}
