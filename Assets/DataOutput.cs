@@ -11,6 +11,9 @@ public class DataOutput : MonoBehaviour
 	private StreamWriter sr;
 	public InteractionWithCube FingerCheck;
 	public GameManager Manager;
+	public bool audioCheck = false;
+	public bool hapticCheck = false;
+	public bool VisualCheck = false;
 
 	// Start is called before the first frame update
 	void Start()
@@ -48,6 +51,21 @@ public class DataOutput : MonoBehaviour
 			}
 			if (FingerCheck.RecordData)
 			{
+				if (FingerCheck.audioFeedback && !VisualCheck)
+				{
+					VisualCheck = true;
+					sr.WriteLine("Visual Feedback");
+				}
+				if (FingerCheck.audioFeedback && !audioCheck)
+				{
+					audioCheck = true;
+					sr.WriteLine("Audio Feedback");
+				}
+				if(FingerCheck.tactileFeedback && !hapticCheck)
+				{
+					hapticCheck = true;
+					sr.WriteLine("Haptic Feedback");
+				}
 				float xPosition = this.gameObject.transform.position.x;
 				float yPosition = this.gameObject.transform.position.y;
 				float zPosition = this.gameObject.transform.position.z;
