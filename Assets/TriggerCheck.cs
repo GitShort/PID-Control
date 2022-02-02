@@ -21,6 +21,7 @@ public class TriggerCheck : MonoBehaviour
             CheckIfTrue = true;
             GameManager.Instance.CheckIfAllPlaced();
         }
+        Debug.Log(other.name);
     }
 
     private void OnTriggerExit(Collider other)
