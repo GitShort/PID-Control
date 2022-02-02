@@ -53,6 +53,7 @@ public class InteractionWithCube : MonoBehaviour
 		tactileFeedback = false;
 		//Cube = GameObject.Find("Cube");
 		RecordData = false;
+		IntensityUiController.Instance.ChangeValue(0, finger);
 	}
 
 	void Update()
@@ -119,6 +120,7 @@ public class InteractionWithCube : MonoBehaviour
 			//Debug.Log("Di: " + Di.ToString());
 			//TriggerHapticPulse(Time.deltaTime, 0, Di);
 			int result = PrepareValue(Di, minNormalizeValue, maxNormalizeValue);
+			IntensityUiController.Instance.ChangeValue(Di, finger);
 			//Debug.Log("Normalized: " + result);
 			if(tactileFeedback)
 			{
@@ -165,4 +167,13 @@ public class InteractionWithCube : MonoBehaviour
 		int res = (int)returnValue;
 		return (int)res;
 	}
+	
+	public float PrepareValueFloat(float value, float min, float max)
+	{
+		
+		// float returnValue = (max/100)*procentage;
+		return (value-min)/(max-min);
+	}
+	
+	
 }

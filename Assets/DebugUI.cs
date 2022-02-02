@@ -1,19 +1,15 @@
-﻿//======= Copyright (c) Valve Corporation, All rights reserved. ===============
-//
-// Purpose: Debug UI shown for the player
-//
-//=============================================================================
+﻿
 
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
-namespace Valve.VR.InteractionSystem
-{
+
 	//-------------------------------------------------------------------------
 	public class DebugUI : MonoBehaviour
 	{
-		private Player player;
+		// private Player player;
+		private IntensityUI intensityUI;
 
 		//-------------------------------------------------
 		static private DebugUI _instance;
@@ -33,19 +29,21 @@ namespace Valve.VR.InteractionSystem
 		//-------------------------------------------------
 		void Start()
 		{
-			player = Player.instance;
+			intensityUI = IntensityUI.intensityUI;
+			// player = Player.instance;
 		}
 
 
-#if !HIDE_DEBUG_UI
+// #if !HIDE_DEBUG_UI
         //-------------------------------------------------
         private void OnGUI()
 		{
-            if (Debug.isDebugBuild)
-            {
-                player.Draw2DDebug();
-            }
-        }
-#endif
+			if (intensityUI != null)
+			{
+				intensityUI.DrawIntensity();
+			}
+			// player.Draw2DDebug();
+		}
+// #endif
     }
-}
+
