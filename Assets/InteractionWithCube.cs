@@ -134,7 +134,7 @@ public class InteractionWithCube : MonoBehaviour
 			drawSphere = false;
 			Debug.DrawRay(transform.position, fwd, Color.red);
 			line.SetPosition(1, new Vector3(0, 0, 0));
-			
+			IntensityUiController.Instance.ChangeValue(0, finger);
 			//SerialConnection.AddFingerForce(0, finger);
 		}
 		if(tactileFeedback)
