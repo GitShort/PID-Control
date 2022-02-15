@@ -1,11 +1,15 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Valve.VR;
+using Valve.VR.InteractionSystem;
 
-namespace Valve.VR.InteractionSystem
-{
+// using Valve.VR.InteractionSystem;
+
     public class HandCollider : MonoBehaviour
     {
+        
         private new Rigidbody rigidbody;
         [HideInInspector]
         public HandPhysics hand;
@@ -73,6 +77,8 @@ namespace Valve.VR.InteractionSystem
 
         private static PhysicMaterial physicMaterial_lowfriction;
         private static PhysicMaterial physicMaterial_highfriction;
+
+        private GameObject tempCollision;
 
         private void Awake()
         {
@@ -262,10 +268,11 @@ namespace Valve.VR.InteractionSystem
                 if (collision.rigidbody.isKinematic == false) touchingDynamic = true;
             }
 
+            tempCollision = collision.gameObject;
             // low friction if touching static object, high friction if touching dynamic
             SetPhysicMaterial(touchingDynamic ? physicMaterial_highfriction : physicMaterial_lowfriction);
 
-
+            
 
             float energy = collision.relativeVelocity.magnitude;
 
@@ -280,5 +287,11 @@ namespace Valve.VR.InteractionSystem
             }
         }
 
+        private void OnCollisionExit(Collision collision)
+        {
+            if (tempCollision == collision.gameObject)
+            {
+                
+            }
+        }
     }
-}

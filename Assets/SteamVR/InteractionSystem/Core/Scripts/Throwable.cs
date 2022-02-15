@@ -49,6 +49,7 @@ namespace Valve.VR.InteractionSystem
         protected Quaternion attachRotation;
         protected Transform attachEaseInTransform;
 
+        public float penetrationCoeff;
 		public UnityEvent onPickUp;
         public UnityEvent onDetachFromHand;
         public HandEvent onHeldUpdate;

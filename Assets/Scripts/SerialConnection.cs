@@ -19,7 +19,8 @@ public class SerialConnection : MonoBehaviour
         RightIndex = 6,
         RightMiddle = 7,
         RightRing = 8,
-        RightPinky = 9
+        RightPinky = 9,
+        Count = 10
     }
 
 
