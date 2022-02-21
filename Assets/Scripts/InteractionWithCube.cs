@@ -89,6 +89,8 @@ public class InteractionWithCube : MonoBehaviour
 		
 		distance = Vector3.Distance(trackingFinger.transform.position, transform.position);
 
+		float vis = 0;
+
 		Vector3 fwd = this.gameObject.transform.TransformDirection(Vector3.right);
 		Vector3 velocity = (transform.position - _previousPos) / Time.deltaTime; 
 		_previousPos = transform.position;
